@@ -114,10 +114,10 @@ class Blanks extends Component{
 		let blanks_paper = this._element.querySelector('[class="Тип бумаги:"]');
 		let blanks_formats = this._element.querySelector('[class="Формат:"]');
 
-			if(blanks_paper.value === 'Газетная' && blanks_formats.value === 'A3') {
+			if(blanks_paper.value === 'Газетная') {
 				this._result_paper = circulation * 0.0066 * dataNewspaper;
 			 }
-				else if(blanks_paper.value === 'Офсетная' && blanks_formats.value === 'A3') {
+				else if(blanks_paper.value === 'Офсетная') {
 					 this._result_paper = circulation * 0.01 * dataOffsetPaper;	
 			}
 		} 
@@ -183,14 +183,8 @@ class Blanks extends Component{
 		 this._printing_time(dataPriceMin, circulation);
 		 this._cutting(dataPriceMin, circulation);
 		 
-			if (blanks_formats.value !== "A3") {
-				 this.result = this._result_paint + this._print_time + this._result_cutting 
-				 + this._result_paper + this._selectedOptionMaster.value*5400 // получения конечной суммы
-			 }else {
-
-			 	this.result = this._result_paint + this._print_time
-				 + this._result_paper + this._selectedOptionMaster.value*5400 // получения конечной суммы
-			 }
+		 this.result = this._result_paint + this._print_time + this._result_cutting 
+				 + this._result_paper + this._selectedOptionMaster.value*5400
 		}
 
 	_showResult (dataNewspaper, dataOffsetPaper, dataPaintGr, dataPriceMin, elemInnerRes, circulationData) {
