@@ -1,84 +1,202 @@
 'use strict'
 
 class Blanks extends Component{
-	constructor({ element, options, elemInnerRes, button, element_menu_bar }) {
+	constructor({ element, options, elemInnerRes, data}) {
     	super(element);
     	this._element = element
-    	this._options = options;
-    	this._elemInnerRes = elemInnerRes;
-    	this._button = button
-    	this._element_menu_bar = element_menu_bar
-    	this._showingInfoTooltip
-		this._showingChangeTooltip
-
-		this._element_menu_bar.addEventListener('mouseover', (e) => { //событие на всплывающее меню (меню информации)
-			 this._showInfoOrChange(e)
-		})
-
-		this._element_menu_bar.addEventListener('mouseout', () => { //удаление блока информации при увода курсора мыши
-			if (this._showingInfoTooltip) {
-		        document.body.removeChild(this._showingInfoTooltip);
-		        this._showingInfoTooltip = null;
-      			}
-      		})
-
-    	this._render_MenuBar()
+    	this._options = options
+    	
 		this._chooseSelect(this._options);
 
+		let button = document.querySelector('#button');
 
-		this._button.addEventListener('click', () => {
-    		this._showResult()
-    	})
+		let menuBar = document.querySelector('[class="menu_bar"]');
+
+		this._render_MenuBar(menuBar);
+
+		let blakns_price_newspaper = data.blakns_price_newspaper;
+		let blakns_price_offsetpaper = data.blakns_price_offsetpaper;
+		let blakns_paint_gramm = data.blakns_paint_gramm;
+		let blakns_price_min = data.blakns_price_min;
+
+		this._input = document.querySelector('[class="all_input"]');
+		let elemInner = document.querySelector('#res');
+
+		let circulation //тираж
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////событие на отображение блока информации////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		    let showingTooltip;
+
+		    menuBar.onmouseover = function(e) {
+				    if (showingTooltip) {
+				        document.body.removeChild(showingTooltip);
+				        showingTooltip = null;
+				      }
+
+		      let target = e.target;
+
+		      let tooltip = target.getAttribute('data-tooltip');
+		      if (!tooltip) return;
+
+		      let tooltipElem = document.createElement('div');
+		      tooltipElem.className = 'tooltip';
+		      tooltipElem.innerHTML = `
+	              <div class"content_element_change_oftions" style="float: left; width: 200px">Цена газетной бумаги (кг):</div> 
+	              <input class="blanks_change_data" id="input_blakns_price_newspaper" value="${blakns_price_newspaper}"> <br>
+			      <div class"content_element_change_oftions" style="float: left; width: 200px">Цена офсетной бумаги (кг):</div> 
+			      <input class="blanks_change_data" id="input_blakns_price_offsetpaper" value="${blakns_price_offsetpaper}"><br>
+			      <div class"content_element_change_oftions" style="float: left; width: 200px">Цена краски (гр):</div>          
+			      <input class="blanks_change_data" id="input_blakns_paint_gramm" value="${blakns_paint_gramm}"><br>
+			      <div class"content_element_change_oftions" style="float: left; width: 200px">Рабочее время печати (мин):</div>
+			      <input class="blanks_change_data" id="input_blakns_price_min" value="${blakns_price_min}"><br>
+			      		      <button class="blanks_change_data_exit" id="exit">применить</button>
+				 `
+		      document.body.appendChild(tooltipElem);
+
+		      let coords = target.getBoundingClientRect();
+
+		      let left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) / 2;
+		      if (left < 0) left = 0; // не вылезать за левую границу окна
+
+		      let top = coords.top - tooltipElem.offsetHeight - 5;
+		      if (top < 0) { // не вылезать за верхнюю границу окна
+		        top = coords.top + target.offsetHeight + 5;
+		      }
+
+		      tooltipElem.style.left = left + 'px';
+		      tooltipElem.style.top = top + 'px';
+
+		      showingTooltip = tooltipElem;
+
+		      let input_blakns_price_newspaper = document.querySelector('#input_blakns_price_newspaper');
+		      let input_blakns_price_offsetpaper = document.querySelector('#input_blakns_price_offsetpaper');
+		      let input_blakns_paint_gramm = document.querySelector('#input_blakns_paint_gramm');
+		      let input_blakns_price_min = document.querySelector('#input_blakns_price_min');
+
+				input_blakns_price_newspaper.oninput = () => {
+					blakns_price_newspaper = +input_blakns_price_newspaper.value || 12200;
+				}
+				input_blakns_price_offsetpaper.oninput = () => {
+					blakns_price_offsetpaper = +input_blakns_price_offsetpaper.value || 22000;
+				}
+
+				input_blakns_paint_gramm.oninput = () => {
+					blakns_paint_gramm = +input_blakns_paint_gramm.value || 590;
+				}
+
+				input_blakns_price_min.oninput = () => {
+					blakns_price_min = +input_blakns_price_min.value || 330;
+				}
+		      
+		   
+			  let exit = document.querySelector('[class="blanks_change_data_exit"]')
+				    if (exit) { 
+				    	 exit.onclick = function(e) {
+				    		if (showingTooltip) {
+				        document.body.removeChild(showingTooltip);
+				        showingTooltip = null;
+				      }
+				    };
+				 }
+		    };
+//////////////////////////////////////конец события//////////////////////////////////////////////////////////////////////
+		
+		button.addEventListener('click', () => {
+	    		this._showResult(blakns_price_newspaper, blakns_price_offsetpaper, blakns_paint_gramm, blakns_price_min, elemInner, circulation)
+	    	});
 
 	}
 
-
-	_getPaper () {
+	_getPaper (dataNewspaper, dataOffsetPaper, circulation) {
 		//получение бумаги(исп. формат и тип)
-		this._blanks_paper = this._element.querySelector('[class="Тип бумаги:"]');
-		this._blanks_formats = this._element.querySelector('[class="Формат:"]');
+		let blanks_paper = this._element.querySelector('[class="Тип бумаги:"]');
+		let blanks_formats = this._element.querySelector('[class="Формат:"]');
 
-			if(this._blanks_paper.value === 'Газетная' && this._blanks_formats.value === 'A3') {
-				this._result_paper = +this._input.value * 0.0066 * this._blakns_price_newspaper;
+			if(blanks_paper.value === 'Газетная' && blanks_formats.value === 'A3') {
+				this._result_paper = circulation * 0.0066 * dataNewspaper;
 			 }
-				else if(this._blanks_paper.value === 'Офсетная' && this._blanks_formats.value === 'A3') {
-					 this._result_paper = +this._input.value * 0.01 * this._blakns_price_offsetpaper;	
+				else if(blanks_paper.value === 'Офсетная' && blanks_formats.value === 'A3') {
+					 this._result_paper = circulation * 0.01 * dataOffsetPaper;	
 			}
-		} // расчёт
+		} 
 
-	_getPaint() { //расчет краски
-		this._painter = this._element.querySelector('[class="Красочность:"]')
-		  if (this._painter.value === "1+0") {
-		  	this._result_paint = ( +this._input.value * 1 * 1000/16000 ) * this._blakns_paint_gramm
+	_getPaint(dataPaintGr, circulation) { //расчет краски
+		let painter = this._element.querySelector('[class="Красочность:"]')
+		  if (painter.value === "1+0") {
+		  	this._result_paint = ( circulation * 1 * 1000/16000 ) * dataPaintGr
 		  }else {
-		  	this._result_paint = ( +this._input.value * 2 * 1000/16000 ) * this._blakns_paint_gramm
+		  	this._result_paint = ( circulation * 2 * 1000/16000 ) * dataPaintGr
 		     }
-		  	}
+		  	}	  	
 
-    _cutting() { //расчет резки
-		  this._result_cutting = +this._input.value * 3 / 1000 * this._blakns_price_min  
+    _cutting(dataPriceMin, circulation) { //расчет резки
+    	let blanks_formats = this._element.querySelector('[class="Формат:"]');
+	    	if(blanks_formats.value !== "A3") {
+			  this._result_cutting = circulation * 3 / 1000 * dataPriceMin  
+	    	}else {
+	    		this._result_cutting = 0;
+	    	}
 		}
 
-	_printing_time () {
+	_printing_time (dataPriceMin, circulation) {
 		 this._selectedOptionMaster = this._element.querySelector('[class="Мастер:"]')
 		 if(this._selectedOptionMaster.value === '1') {
-		 	 this._print_time = (((+this._input.value * 1 * 20)/1000) + 11 * 1) * this._blakns_price_min
+		 	 this._print_time = (((circulation * 1 * 20)/1000) + 11 * 1) * dataPriceMin
 		 }else{
-			this._print_time = (((+this._input.value * 1 * 20)/1000) + 11 * 2) * this._blakns_price_min
+			this._print_time = (((circulation * 1 * 20)/1000) + 11 * 2) * dataPriceMin
 		 } //расчёт время печати
 		}
  
- 	_getCalculatResult () {
-		 this._getPaper();
-		 this._getPaint();
-		 this._printing_time();
-		 this._cutting();
-		 this.result = this._result_paint + this._print_time + this._result_cutting + this._result_paper + this._selectedOptionMaster.value*5400 // получения конечной суммы
+ 	_circulationForA3 (circulationData) {
+ 		let blanks_formats = this._element.querySelector('[class="Формат:"]')
+
+ 		if (blanks_formats.value === "A3") {
+ 			circulationData = +this._input.value
+ 			return circulationData
+ 		}
+ 		else if(blanks_formats.value === "A4") {
+ 			circulationData = +this._input.value / 2
+ 			return circulationData
+ 		}
+ 		else if(blanks_formats.value === "A5") {
+ 			circulationData = +this._input.value / 4
+ 			return circulationData
+ 		}
+ 		else if(blanks_formats.value === "A6") {
+ 			circulationData = +this._input.value / 8
+ 			return circulationData
+ 		}
+ 		else if(blanks_formats.value === "A7") {
+ 			circulationData = +this._input.value / 16
+ 			return circulationData
+ 		}
+ 	}
+
+ 	_getCalculatResult (dataNewspaper, dataOffsetPaper, dataPaintGr, dataPriceMin, circulationData) {
+ 		 let circulation = this._circulationForA3(circulationData)
+ 		 let blanks_formats = this._element.querySelector('[class="Формат:"]')
+
+		 this._getPaper(dataNewspaper, dataOffsetPaper, circulation);
+		 this._getPaint(dataPaintGr, circulation);
+		 this._printing_time(dataPriceMin, circulation);
+		 this._cutting(dataPriceMin, circulation);
+		 
+			if (blanks_formats.value !== "A3") {
+				 this.result = this._result_paint + this._print_time + this._result_cutting 
+				 + this._result_paper + this._selectedOptionMaster.value*5400 // получения конечной суммы
+			 }else {
+
+			 	this.result = this._result_paint + this._print_time
+				 + this._result_paper + this._selectedOptionMaster.value*5400 // получения конечной суммы
+			 }
 		}
 
-	_showResult () {
-		  this._getCalculatResult();
-		    this._elemInnerRes.innerHTML = `
+	_showResult (dataNewspaper, dataOffsetPaper, dataPaintGr, dataPriceMin, elemInnerRes, circulationData) {
+		  this._getCalculatResult(dataNewspaper, dataOffsetPaper, dataPaintGr, dataPriceMin, circulationData);
+		  let blanks_formats = this._element.querySelector('[class="Формат:"]')
+		    elemInnerRes.innerHTML = `
 			<table>
 			  <caption>
 			    Результат
@@ -113,140 +231,7 @@ class Blanks extends Component{
 			  </tr>
 			</table>    ` //отрисовка результата
 		}	
-	
-	_render_MenuBar() {
-		//отрисовка меню_бара
-		this._element_menu_bar.innerHTML = `
-	  <ul>
-        <li><span data-tooltip="info">Информация</span></li>
-        <li><span class="change_data">Изменить данные</a></li>
-      </ul>
-		` //отрисовка меню_бара
 	}
 
-	_showInfoDiv (target) {
-		      let tooltip = target.getAttribute('data-tooltip');
-		      if (!tooltip) return;
-
-		      let tooltipElem = document.createElement('div');
-		      tooltipElem.className = 'tooltip';
-		      tooltipElem.innerHTML = `
-		      <b>Бланки: </b> <br>
-		      Цена газетной бумаги (кг): ${this._blakns_price_newspaper} р. <br>
-		      Цена офсетной бумаги (кг): ${this._blakns_price_offsetpaper} р. <br>
-		      Цена краски (гр): ${this._blakns_paint_gramm} р. <br>
-		      Рабочее время печати (мин): ${this._blakns_price_min} р. <br>
-		      `;
-		      document.body.appendChild(tooltipElem);
-
-		      let coords = target.getBoundingClientRect();
-
-		      let left = coords.left // не вылезать за левую границу елемента
-
-		      let top = coords.top - tooltipElem.offsetHeight - 5;
-		      if (top < 0) { // не вылезать за верхнюю границу окна
-		        top = coords.top + target.offsetHeight + 5;
-		      }
-
-		      tooltipElem.style.left = left + 'px';
-		      tooltipElem.style.top = top + 'px';
-
-		      this._showingInfoTooltip = tooltipElem;  //добавление блока информации
-	}
-
-	_showChangeDiv (target) {	
-
-			if (this._showingChangeTooltip) { //удаление при повторном наведении
-		        document.body.removeChild(this._showingChangeTooltip);
-		        this._showingChangeTooltip = null;
-		    }
-
-			 let prover = document.querySelector('#tooltip.change'); //создание блока, если его нет
-
-			 let tooltipElem = document.createElement('div');
-			 tooltipElem.className = 'tooltip';
-			 tooltipElem.setAttribute('id', 'tooltip_change');
-			 this._showChangeOptions(tooltipElem);
-
-		     document.body.appendChild(tooltipElem);
-
-
-		      let coords = target.getBoundingClientRect();
-
-		      let left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) / 2;
-     		 if (left < 0) left = 0; // не вылезать за левую границу окна
-
-
-		      let top = coords.top - tooltipElem.offsetHeight - 5;
-		      if (top < 0) { // не вылезать за верхнюю границу окна
-		        top = coords.top + target.offsetHeight + 5;
-		      }
-
-		      tooltipElem.style.left = left + 'px';
-		      tooltipElem.style.top = top + 'px';
-
-		      this._showingChangeTooltip = tooltipElem;//добавление блока изменения данных
-
-	}
-
-	_showInfoOrChange(event) {
-		if (event.target.closest("[data-tooltip]")) {
-			 let target = event.target
-			this._showInfoDiv(target)
-		}else if (event.target.closest('.change_data')) {
-			//показ блока изменения данных
-			let target = event.target
-			this._showChangeDiv(target)
-
-			this._changeOptions()
-
-			console.log(this)
-
-			this._exit = document.querySelector('[class="blanks_change_data_exit"]')
-			//удаление блока изменения данных при нажатии на кнопку "закрыть"
-			this._exit.addEventListener('click', (e) => {
-				if (this._showingChangeTooltip) {
-		        document.body.removeChild(this._showingChangeTooltip);
-		        this._showingChangeTooltip = null;
-      			}			
-		})
-		}//показ блока информации
-	}
-
-	_showChangeOptions (element) {
-
-		element.innerHTML = `
-		 <b>Бланки: </b> <br>
-              <div class"content_element_change_oftions" style="float: left; width: 190px">Цена газетной бумаги (кг):</div> <input class="blanks_change_data" id="input_blakns_price_newspaper" value="${this._blakns_price_newspaper}"> <br>
-		      <div class"content_element_change_oftions" style="float: left; width: 190px">Цена офсетной бумаги (кг):</div> <input class="blanks_change_data" id="input_blakns_price_offsetpaper" value="${this._blakns_price_offsetpaper}"><br>
-		      <div class"content_element_change_oftions" style="float: left; width: 190px">Цена краски (гр):</div>          <input class="blanks_change_data" id="input_blakns_paint_gramm" value="${this._blakns_paint_gramm}"><br>
-		      <div class"content_element_change_oftions" style="float: left; width: 190px">Рабочее время печати (мин):</div><input class="blanks_change_data" id="input_blakns_price_min" value="${this._blakns_price_min}"><br><br>
-		      <span class="blanks_change_data_exit" id="exit">применить</span>
-		      `;//отрисовка ввода опций
-	}
-
-	_changeOptions() {
-		let newspaperData = document.querySelector('#input_blakns_price_newspaper');
-		let ofsetpaperData = document.querySelector('#input_blakns_price_offsetpaper');
-		let paintGrData = document.querySelector('#input_blakns_paint_gramm');
-		let priceMinData = document.querySelector('#input_blakns_price_min');
-
-		newspaperData.oninput = () => {
-			this._blakns_price_newspaper = +newspaperData.value || 12200;
-		}
-
-		ofsetpaperData.oninput = () => {
-			this._blakns_price_offsetpaper = +ofsetpaperData.value || 22000;
-		}
-
-		paintGrData.oninput = () => {
-			this._blakns_paint_gramm = +paintGrData.value || 590;
-		}
-
-		priceMinData.oninput = () => {
-			this._blakns_price_min = +priceMinData.value || 330;
-		}//слушать событие инпутов внутри блока изменения данных и перезаписывать свойства
-	}
-}
 
 

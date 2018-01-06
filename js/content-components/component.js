@@ -4,21 +4,31 @@
 class Component {
 	constructor( element ) {
 		this._element = element;
-		this._input = document.querySelector('[class="all_input"]')
-		this._blakns_paint_gramm = 590; //цена за грамм краски
-		this._blakns_price_min = 330; //рабочее время печати за 1 мин
-		this._blakns_price_newspaper = 12200;
-		this._blakns_price_offsetpaper = 22000;
 		this._inicialize()
 	}
 
+    _renderComponentInputAndResult () {
+	 		let div1 = document.createElement('div');
+			div1.className = "contents";
+		    this._element.appendChild(div1); 
+		    div1.innerHTML = `
+			       
+            <div class="content_element"><span class="content_element_span">Тираж:<span> </div><input type="text" class="all_input" value="1" style="margin-bottom: 10px">
+            <div id="buttonResult">
+			<button id="button" style="margin-bottom: 10px">Посчитать</button>
+            </div>
+            <div name="result" id="res"></div>         
+      
+		    ` 		
+	 }
 
-	_chooseSelect(options) {
+    _chooseSelect(options) {
 	 	// перебор свой в исходных данных, для отрисовки селектов
 	    let arr = options;
 	    for (let i = 0; i < arr.length; i++) {
 	      this._render(arr[i])
-	    } 	 	// перебор свой в исходных данных, для отрисовки селектов
+	    }
+	    this._renderComponentInputAndResult() 	 	// перебор свой в исходных данных, для отрисовки селектов
   	}
 
   	_render(obj) {
@@ -26,7 +36,8 @@ class Component {
 		let div = document.createElement('div');
 		div.className = "contents";
 	    this._element.appendChild(div);
-	   	this._renderSelect(div, obj);   		//создание нового блока, для каждого селекта
+	   	this._renderSelect(div, obj);
+//создание нового блока, для каждого селекта
 	}
 
   	_renderSelect(elementInInner, obj) {
@@ -41,9 +52,10 @@ class Component {
 	    };
 	    elementInInner.innerHTML = `
 	      <div class="content_element"><span class="content_element_span">${keys}</span></div>
-	      <select name="${keys}" class="${keys}">
+	      <select class="${keys}">
 	      ${str}
-	      </select>`     		//отрисовка селектов
+	      </select>
+	      `     		//отрисовка селектов
 	}
 
 	_inicialize() {
@@ -56,45 +68,28 @@ class Component {
 
  	_removeDivContent () {
 		//удаление прошлых узлов, при выборе другого option в титульном селекте
-		let rem = this._element.querySelectorAll('[class="contents"]')
+		let bar_content = document.querySelector('[class="bar_content"]')
+		let rem = bar_content.querySelectorAll('[class="contents"]')
 		for (let i = 0; i < rem.length; i++) {
 			rem[i].remove()
 		}		//удаление прошлых узлов, при выборе другого option в титульном селекте
 	}
 
-	_removeDivResult () {
-		//удаление в блоке результат, всех узлов
-		let remove_result = this._element.querySelector('#res');
-		let element = remove_result.firstElementChild;
+	_removeMenuBar () {
+		let menuBar = document.querySelector('[class="menu_bar"]')
+		let element = menuBar.querySelector('ul')
 		if (!element) {
 			return
 		}else {
 			element.remove()
-		} 		//удаление в блоке результат, всех узлов
+		}
 	}
 
-	_removeDivInfo () { // удаление блока информации
-		let remove_info = this._element.querySelector('[class="menu_bar"]');
-		let element = remove_info.firstElementChild;
-		if (!element) {
-			return
-		}else {
-			element.remove()
-	}
-  }
-
-	_removeLastDiv (funA, funB, funcC) {
-		funA();
-		funB();
-		funcC();
-	}	
-
-   _render_MenuBar() {
-		this._element_menu_bar.innerHTML = `
-	  <ul>
-        <li><span data-tooltip="info">Информация</span></li>
-        <li><span class="change_data">Изменить данные</a></li>
-      </ul>
+	_render_MenuBar(a) {
+		a.innerHTML = `
+	  
+    	<img src="assets/img/settings.png" width="60px" height="46" data-tooltip="info">
+      
 		` //отрисовка меню_бара
 	}
 }

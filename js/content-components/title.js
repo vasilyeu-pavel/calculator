@@ -4,7 +4,7 @@ class Title extends Component {
 	constructor ({ element, options }) {
     super(element);
     this._options = options;
-		this._chooseSelect(this._options);
+		this._chooseSelectTitle(this._options);
 
     this._select = this._element.querySelector('select')
 
@@ -16,10 +16,15 @@ class Title extends Component {
     })
 
 	}
-
-	_render(obj) {
-      this._renderSelect(this._element, obj);
-	}
+    _chooseSelectTitle(options) {
+    // перебор свой в исходных данных, для отрисовки селектов
+      let arr = options;
+      for (let i = 0; i < arr.length; i++) {
+        this._render(arr[i])
+      }
+          // перебор свой в исходных данных, для отрисовки селектов
+    } 
+    
 
 
 }
