@@ -18,6 +18,7 @@ class Blanks extends Component{
 		let blakns_price_offsetpaper = data.blakns_price_offsetpaper;
 		let blakns_paint_gramm = data.blakns_paint_gramm;
 		let blakns_price_min = data.blakns_price_min;
+		let blakns_price_master = data.blakns_price_master;
 
 		this._input = document.querySelector('[class="all_input"]');
 		let elemInner = document.querySelector('#res');
@@ -51,6 +52,8 @@ class Blanks extends Component{
 			      <input class="blanks_change_data" id="input_blakns_paint_gramm" value="${blakns_paint_gramm}"><br>
 			      <div class"content_element_change_oftions" style="float: left; width: 200px">Рабочее время печати (мин):</div>
 			      <input class="blanks_change_data" id="input_blakns_price_min" value="${blakns_price_min}"><br>
+			      <div class"content_element_change_oftions" style="float: left; width: 200px">Цена мастера:</div>
+			      <input class="blanks_change_data" id="input_blakns_price_master" value="${blakns_price_master}"><br>
 			      		      <button class="blanks_change_data_exit" id="exit">применить</button>
 				 `
 		      document.body.appendChild(tooltipElem);
@@ -89,6 +92,10 @@ class Blanks extends Component{
 				input_blakns_price_min.oninput = () => {
 					blakns_price_min = +input_blakns_price_min.value || 330;
 				}
+
+				input_blakns_price_master.oninput = () => {
+					blakns_price_master = +input_blakns_price_master.value || 5400;
+				}
 		      
 		   
 			  let exit = document.querySelector('[class="blanks_change_data_exit"]')
@@ -104,7 +111,8 @@ class Blanks extends Component{
 //////////////////////////////////////конец события//////////////////////////////////////////////////////////////////////
 		
 		button.addEventListener('click', () => {
-	    		this._showResult(blakns_price_newspaper, blakns_price_offsetpaper, blakns_paint_gramm, blakns_price_min, elemInner, circulation)
+	    		this._showResult(blakns_price_newspaper, blakns_price_offsetpaper, blakns_paint_gramm, blakns_price_min,
+	    		 elemInner, circulation, blakns_price_master)
 	    	});
 
 	}
@@ -174,7 +182,7 @@ class Blanks extends Component{
  		}
  	}
 
- 	_getCalculatResult (dataNewspaper, dataOffsetPaper, dataPaintGr, dataPriceMin, circulationData) {
+ 	_getCalculatResult (dataNewspaper, dataOffsetPaper, dataPaintGr, dataPriceMin, circulationData, blakns_price_master) {
  		 let circulation = this._circulationForA3(circulationData)
  		 let blanks_formats = this._element.querySelector('[class="Формат:"]')
 
@@ -184,11 +192,13 @@ class Blanks extends Component{
 		 this._cutting(dataPriceMin, circulation);
 		 
 		 this.result = this._result_paint + this._print_time + this._result_cutting 
-				 + this._result_paper + this._selectedOptionMaster.value*5400
+				 + this._result_paper + this._selectedOptionMaster.value*blakns_price_master
 		}
 
-	_showResult (dataNewspaper, dataOffsetPaper, dataPaintGr, dataPriceMin, elemInnerRes, circulationData) {
-		  this._getCalculatResult(dataNewspaper, dataOffsetPaper, dataPaintGr, dataPriceMin, circulationData);
+	_showResult (dataNewspaper, dataOffsetPaper, dataPaintGr, dataPriceMin, elemInnerRes, 
+		circulationData, blakns_price_master) {
+		  this._getCalculatResult(dataNewspaper, dataOffsetPaper, dataPaintGr, dataPriceMin, 
+		  	circulationData, blakns_price_master);
 		  let blanks_formats = this._element.querySelector('[class="Формат:"]')
 		    elemInnerRes.innerHTML = `
 			<table>
@@ -204,7 +214,7 @@ class Blanks extends Component{
 			    <td>${Math.round(this._result_paper)}</td>
 			  </tr>
 			  <tr>
-			    <td>Мастер * 5400 рублей</td>
+			    <td>Мастер * ${blakns_price_master} рублей</td>
 			    <td>${this._selectedOptionMaster.value}</td>
 			  </tr>
 			  <tr>

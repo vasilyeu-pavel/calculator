@@ -8,6 +8,7 @@ const data = {
 			"blakns_price_min" : 330, //рабочее время печати за 1 мин
 			"blakns_price_newspaper" : 12200,
 			"blakns_price_offsetpaper" : 22000,
+			"blakns_price_master" : 5400,
 		},
 		"blanksOptions" : [
 			{"Тип бумаги:" : ["Газетная", "Офсетная"]},
