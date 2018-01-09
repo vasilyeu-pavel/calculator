@@ -1,0 +1,34 @@
+{
+ "blanks" : 
+	{
+	"data_blank" :
+		{
+		"blakns_paint_gramm" : 590, 
+		"blakns_price_min" : 330, 
+		"blakns_price_newspaper" : 12200,
+		"blakns_price_offsetpaper" : 22000,
+		"blanks_price_master" : 5400
+	},
+	"blanksOptions" : [
+		{"Тип бумаги:" : ["Газетная", "Офсетная"]},
+		{"Мастер:" : [1, 2]},
+		{"Формат:" : ["A3", "A4", "A5", "A6", "A7"]},
+		{"Красочность:" : ["1+0", "1+1"]}
+	]
+},
+	"books" :
+	 {
+	 	"data_books" : {
+	 		"no data" : "no data"
+	 	},
+	 	"booksOptions" : [
+	 		{"нет данных:" : ["-", "-"]},
+			{"нет данных:" : ["-", "-"]},
+			{"нет данных:" : ["-", "-"]}
+	 	]
+	 },
+	 "title" : [
+		{"нет данных:" : ["-", "-"]}
+	 ]
+}
+

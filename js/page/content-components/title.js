@@ -1,6 +1,7 @@
 'use strict'
+import Component from './component.js'
 
-class Title extends Component {
+export default class Title extends Component {
 	constructor ({ element, options }) {
     super(element);
     this._options = options;

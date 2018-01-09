@@ -1,7 +1,7 @@
 'use strict'
 //общий класс для всех компонентов страницы, от него наследую методы и свойства
 
-class Component {
+export default class Component {
 	constructor( element ) {
 		this._element = element;
 		this._inicialize()
