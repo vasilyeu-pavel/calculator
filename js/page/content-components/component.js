@@ -53,7 +53,8 @@ export default class Component {
 	    elementInInner.innerHTML = `
 	      <div class="content_element"><span class="content_element_span">${keys}</span></div>
 	      <select class="${keys}">
-	      ${str}
+	       <option selected disabled>...</option>
+	       ${str}
 	      </select>
 	      `     		//отрисовка селектов
 	}

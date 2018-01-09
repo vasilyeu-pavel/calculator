@@ -19,12 +19,21 @@
 	"books" :
 	 {
 	 	"data_books" : {
-	 		"no data" : "no data"
+	 		"books_paint_gramm" : 590, 
+			"books_price_min" : 330, 
+			"books_price_newspaper" : 12200,
+			"books_price_offsetpaper" : 23000,
+			"books_price_master" : 5400,
+			"books_price_ISBN" : 70000,
+			"books_price_konsul" : 50000,
+			"books_verstka" : 400000,
+			"books_korrektura" : 300000,
+			"books_change_master1" : 9100,
+			"books_change_master2" : 10500
 	 	},
 	 	"booksOptions" : [
-	 		{"нет данных:" : ["-", "-"]},
-			{"нет данных:" : ["-", "-"]},
-			{"нет данных:" : ["-", "-"]}
+			{"Тип бумаги:" : ["Газетная", "Офсетная"]},
+			{"Формат:" : ["A4", "A5"]}
 	 	]
 	 },
 	 "title" : [

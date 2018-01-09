@@ -42,6 +42,7 @@ export default class Page extends Component{
 					element: this._element.querySelector('[class="bar_content"]'),
 					options: dataValue.books.booksOptions,
 					elemInnerRes: this._element.querySelector('#res'),
+					data: dataValue.books.data_books
 							
 				})
 			})

@@ -52,28 +52,28 @@ input:focus {
 }
 
 h1, h2 {
-	padding: 15px 0 5px 0;
-	margin: 0 0 15px 0;
-	color: #000;
+  padding: 15px 0 5px 0;
+  margin: 0 0 15px 0;
+  color: #000;
 }
 
 .header {
-	height: 30px;
-	font-size: 0.8em;
-	margin-left: 0px;
-	margin-right: 0px;
-	padding-left: 45%;
-	padding-top: 5px;
-	margin-bottom: 50px;
+  height: 30px;
+  font-size: 0.8em;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 45%;
+  padding-top: 5px;
+  margin-bottom: 50px;
 }
 
 .content {
-	margin-right: auto;
-	margin-left: auto;
-	width: 800px;
-	border: solid 1px #f2f2f2;
-	border-radius: 3px;
-	padding: 1%;
+  margin-right: auto;
+  margin-left: auto;
+  width: 800px;
+  border: solid 1px #f2f2f2;
+  border-radius: 3px;
+  padding: 1%;
   padding-top: 0;
 }
 
@@ -86,43 +86,43 @@ h1, h2 {
 }
 
 .bar_tittle {
-	width: auto;
-	padding: 2px;
-	margin-bottom: 10px;
+  width: auto;
+  padding: 2px;
+  margin-bottom: 10px;
 
 }
 
 .bar_tittle {
-	padding: 3px;
-	margin-right: auto;
-	margin-left: auto;
-	width: 400px;
+  padding: 3px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 400px;
 }
 
 .bar_content div {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 
 }
 
 .bar_content div.open {
-	display: block;
+  display: block;
 }
 
 #inps{
-	margin-left: 8%;
+  margin-left: 8%;
 }
 
 #but {
-	margin-right: 15px;
+  margin-right: 15px;
 }
 
 table {
-  width: 100%;	
+  width: 100%;  
   font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
   border-collapse: collapse;
   color: #686461;
 }
-caption {	
+caption { 
   padding: 10px;
   color: white;
   background: #8FD4C1;
@@ -154,8 +154,8 @@ tr:nth-child(even) {
 }
 
 .menu_bar {
-	width: 800px;
-	margin-right: auto;
+  width: 800px;
+  margin-right: auto;
     margin-left: auto;
     padding-left: 1%;
     padding-right: 1%;
@@ -186,7 +186,7 @@ tr:nth-child(even) {
 
 .content_element {
   float: left;
-  width: 147px;
+  width: 158px;
 }
 
 .content_element_span {
