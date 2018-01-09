@@ -3,8 +3,8 @@
 class Blanks extends Component{
 	constructor({ element, options, elemInnerRes, data}) {
     	super(element);
-    	this._element = element
     	this._options = options
+
     	
 		this._chooseSelect(this._options);
 
@@ -77,6 +77,7 @@ class Blanks extends Component{
 		      let input_blakns_price_offsetpaper = document.querySelector('#input_blakns_price_offsetpaper');
 		      let input_blakns_paint_gramm = document.querySelector('#input_blakns_paint_gramm');
 		      let input_blakns_price_min = document.querySelector('#input_blakns_price_min');
+		      let input_blakns_price_master = document.querySelector('#input_blakns_price_master');
 
 				input_blakns_price_newspaper.oninput = () => {
 					blakns_price_newspaper = +input_blakns_price_newspaper.value || 12200;
@@ -120,8 +121,6 @@ class Blanks extends Component{
 	_getPaper (dataNewspaper, dataOffsetPaper, circulation) {
 		//получение бумаги(исп. формат и тип)
 		let blanks_paper = this._element.querySelector('[class="Тип бумаги:"]');
-		let blanks_formats = this._element.querySelector('[class="Формат:"]');
-
 			if(blanks_paper.value === 'Газетная') {
 				this._result_paper = circulation * 0.0066 * dataNewspaper;
 			 }
@@ -199,7 +198,7 @@ class Blanks extends Component{
 		circulationData, blakns_price_master) {
 		  this._getCalculatResult(dataNewspaper, dataOffsetPaper, dataPaintGr, dataPriceMin, 
 		  	circulationData, blakns_price_master);
-		  let blanks_formats = this._element.querySelector('[class="Формат:"]')
+
 		    elemInnerRes.innerHTML = `
 			<table>
 			  <caption>

@@ -4,7 +4,7 @@
 class Component {
 	constructor( element ) {
 		this._element = element;
-		this._inicialize()
+		this._initialization()
 	}
 
     _renderComponentInputAndResult () {
@@ -59,7 +59,7 @@ class Component {
 	      `     		//отрисовка селектов
 	}
 
-	_inicialize() {
+	_initialization() {
 	 	//инициализация переменных
  		this._selectedOptionMaster = this._element.querySelector('[class="Мастер:"]');
  		this._painter = this._element.querySelector('[class="Красочность:"]');

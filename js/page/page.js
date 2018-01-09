@@ -19,13 +19,23 @@ const data = {
 	},
 
 	"books" : {
-		"data_books": {
-			"no data" : "no data",
+		"data_book": {
+			"books_paint_gramm" : 590, //цена за грамм краски
+			"books_price_min" : 330, //рабочее время печати за 1 мин
+			"books_price_newspaper" : 12200,
+			"books_price_offsetpaper" : 23000,
+			"books_price_master" : 5400,
+			"books_price_ISBN" : 70000,
+			"books_price_konsul" : 50000,
+			"books_verstka" : 400000,
+			"books_korrektura" : 300000,
+			"books_change_master1" : 9100,
+			"books_change_master2" : 10500,
 		},
 		"bookOptions" : [
-			{"нет данных:" : ["-", "-"]},
-			{"нет данных:" : ["-", "-"]},
-			{"нет данных:" : ["-", "-"]},
+			{"Тип бумаги:" : ["Газетная", "Офсетная"]},
+			{"Мастер:" : ["2"]},
+			{"Формат:" : ["A4", "A5"]},
 		],	
 	},
 
@@ -61,7 +71,7 @@ class Page extends Component{
 				this._book = new Book ({
 					element: this._element.querySelector('[class="bar_content"]'),
 							options: this._getServerData(data).books.bookOptions,
-							elemInnerRes: this._element.querySelector('#res'),
+							data: this._getServerData(data).books.data_book
 							})
 				break;
 			case 'Бланки':
@@ -70,7 +80,6 @@ class Page extends Component{
 				this._blanks = new Blanks ({
 					element: this._element.querySelector('[class="bar_content"]'),
 					options: this._getServerData(data).blanks.blanksOptions,
-					elemInnerRes: this._element.querySelector('#res'),
 					data: this._getServerData(data).blanks.data_blank, //передаём как свойство дата, результат выполнения функции
 				})
 				break;
