@@ -168,7 +168,7 @@ class Book extends Component {
 			<div class="content_element"><span class="content_element_span">Объём страниц:<span> </div>
 			<input type="text" class="inputPaper" value="1">
 			`
-		    menuBar.insertBefore(div, menuBar.firstChild.nextSibling.nextSibling.nextSibling);
+		    menuBar.insertBefore(div, menuBar.firstChild.nextSibling.nextSibling);
 		}
 
 		_circulationForA3Paper(ciculationPaper) {
@@ -194,8 +194,7 @@ class Book extends Component {
 		}
 
 		_getMaster(dataPaper, books_price_master) {
-			let master = document.querySelector('[class="Мастер:"]');
-			this._result_master = dataPaper * +master.value * books_price_master
+			this._result_master = dataPaper * 2 * books_price_master
 		}
 
 		_getPaint(dataPaper, books_paint_gramm) {
@@ -203,9 +202,8 @@ class Book extends Component {
 		}
 
 		_getTimePainting(dataPaper, books_price_master, books_price_min) {
-			let master = document.querySelector('[class="Мастер:"]');
 		    this._result_timePainting = (dataPaper * +this._input_circulation.value * 20/1000 + 11 *
-			(dataPaper * +master.value)) * books_price_min
+			(dataPaper * 2)) * books_price_min
 		}
 
 		_getCover() {
@@ -299,7 +297,7 @@ class Book extends Component {
 			    <td>${Math.round(this._result_paper)}</td>
 			  </tr>
 			  <tr>
-			    <td>Мастер * ${master.value} рублей</td>
+			    <td>Мастер</td>
 			    <td>${this._result_master}</td>
 			  </tr>
 			  <tr>
