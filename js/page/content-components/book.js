@@ -15,7 +15,7 @@ export default class Book extends Component {
 
 		this._render_MenuBar(menuBar)
 		let elemInnerRes = document.querySelector('#res');
-		
+
 		let books_price_newspaper = data.books_price_newspaper;
 		let books_price_offsetpaper = data.books_price_offsetpaper;
 		let books_paint_gramm = data.books_paint_gramm;
@@ -187,10 +187,10 @@ export default class Book extends Component {
 		_getPaper(dataPaper, dataNewspaper, dataOffsetPaper) {
 			let blanks_paper = document.querySelector('[class="Тип бумаги:"]');
 			if (blanks_paper.value === "Газетная") {
-				this._result_paper = dataPaper * +this._input_circulation.value * 0.0066 * dataNewspaper
+				this._result_paper = dataPaper * +this._input_circulation.value * 0.0066 * dataNewspaper + (15 * dataPaper * 2)
 				;
 			} else {
-				this._result_paper = dataPaper * +this._input_circulation.value * 0.01 * dataOffsetPaper
+				this._result_paper = dataPaper * +this._input_circulation.value * 0.01 * dataOffsetPaper + (15 * dataPaper * 2)
 			}
 		}
 
@@ -280,6 +280,7 @@ export default class Book extends Component {
 	     books_price_korrektura, books_change_master1, books_change_master2, elemInnerRes, ciculationPaper) {
 	     let master = document.querySelector('[class="Мастер:"]');
 
+	     let dataPaper = this._circulationForA3Paper(ciculationPaper);
 		 let result = this._getResult(books_price_newspaper, books_price_offsetpaper, books_paint_gramm, books_price_min,
 	     books_price_master, books_price_ISBN, books_price_konsul, books_price_verstka, 
 	     books_price_korrektura, books_change_master1, books_change_master2, elemInnerRes, ciculationPaper)
@@ -300,6 +301,10 @@ export default class Book extends Component {
 			  <tr>
 			    <td>Мастер</td>
 			    <td>${this._result_master}</td>
+			  </tr>
+			  <tr>
+			    <td>Количество мастеров</td>
+			    <td>${dataPaper * 2}</td>
 			  </tr>
 			  <tr>
 			    <td>Краска</td>
@@ -344,6 +349,7 @@ export default class Book extends Component {
 			  </tr>
 			</table>    
 			` //отрисовка результата
+			
 		}
 
 
