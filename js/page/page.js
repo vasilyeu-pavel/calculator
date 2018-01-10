@@ -9,12 +9,18 @@ const data = {
 			"blakns_price_newspaper" : 12200,
 			"blakns_price_offsetpaper" : 22000,
 			"blakns_price_master" : 5400,
+			"blanks_price_kalka" : 1900,
+			"blanks_price_plastina" : 15000,
+			"blanks_price_copy_plastin" : 7500,
+			"blakns_paint_grammOver" : 110,
+			"blakns_price_minOver" : 500,
+
 		},
 		"blanksOptions" : [
 			{"Тип бумаги:" : ["Газетная", "Офсетная"]},
 			{"Мастер:" : [1, 2]},
 			{"Формат:" : ["A3", "A4", "A5", "A6", "A7"]},
-			{"Красочность:" : ["1+0", "1+1"]},
+			{"Красочность:" : ["1+0", "1+1", "2+0", "2+2"]},
 		],
 	},
 
