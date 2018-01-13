@@ -144,6 +144,7 @@ class Blanks extends Component{
 	    		this._showResult(blakns_price_newspaper, blakns_price_offsetpaper, blakns_paint_gramm, blakns_price_min,
 	    		 elemInner, circulation, blakns_price_master, blanks_price_kalka, blanks_price_plastina, blanks_price_copy_plastin,
 	    		 blakns_paint_grammOver, blakns_price_minOver)
+	    				this._showTableRow()
 	    	});
 
 	}
@@ -165,11 +166,11 @@ class Blanks extends Component{
 		  	this._result_paint = ( circulation * 1 * 1000/16000 ) * dataPaintGr
 		  }else if (painter.value === "1+1") {
 		  	this._result_paint = ( circulation * 2 * 1000/16000 ) * dataPaintGr
-		  }/*else if (painter.value === "2+0") {
+		  }else if (painter.value === "2+0") {
 		  	alert('Красочность 2+0 доступно, только при тираже >= 2500 A3')
 		  }else if (painter.value === "2+2") {
 		  	alert('Красочность 2+2 доступно, только при тираже >= 2500 A3')
-		  }*/
+		  }
 		 }	  	
 
     _cutting(dataPriceMin, circulation) { //расчет резки
@@ -258,7 +259,7 @@ class Blanks extends Component{
 		    elemInnerRes.innerHTML = `
 			<table>
 			  <caption>
-			    Результат
+			    Результат <span class="drop-down">▼</span>
 			  </caption>
 			  <tr>
 			    <th>Наименование операции</th>
@@ -285,6 +286,9 @@ class Blanks extends Component{
 			    <td><b>${Math.round(this.result)}</b></td>
 			  </tr>
 			</table>    ` //отрисовка результата
+			let table = document.querySelector('tbody')
+			table.firstElementChild.classList = "open";
+			table.lastElementChild.classList = "open";
 		}
 
 	_getPaperLargeCirculation(dataNewspaper, dataOffsetPaper, circulation) {
@@ -312,7 +316,7 @@ class Blanks extends Component{
 	    	}else {
 	    		this._result_cutting = 0;
 	    	}
-	}
+   }
 }
 
 

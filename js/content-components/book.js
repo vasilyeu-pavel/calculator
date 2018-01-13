@@ -156,7 +156,9 @@ class Book extends Component {
 	    		this._showResult(books_price_newspaper, books_price_offsetpaper, books_paint_gramm, books_price_min,
 	    		 books_price_master, books_price_ISBN, books_price_konsul, books_price_verstka, 
 	    		 books_price_korrektura, books_change_master1, books_change_master2, elemInnerRes)
+	    		 this._showTableRow()
 	    	});
+			
 		}
 
 		_renderPageInput() {
@@ -287,7 +289,7 @@ class Book extends Component {
 			elemInnerRes.innerHTML = `
 			<table>
 			  <caption>
-			    Результат
+			    Результат <span class="drop-down">▼</span>
 			  </caption>
 			  <tr>
 			    <th>Наименование операции</th>
@@ -348,7 +350,9 @@ class Book extends Component {
 			  </tr>
 			</table>    
 			` //отрисовка результата
-			
+			let table = document.querySelector('tbody')
+			table.firstElementChild.classList = "open";
+			table.lastElementChild.classList = "open";
 		}
 
 

@@ -93,4 +93,16 @@ class Component {
       
 		` //отрисовка меню_бара
 	}
+
+	_showTableRow() {
+		let button = document.querySelector('.drop-down')
+		button.addEventListener('click', () => {
+		 let table = document.querySelector('tbody')
+		 let arr = table.children
+		 for (let i = 1; i < arr.length-1; i++) {
+			arr[i].classList.toggle('open');
+		 }
+
+		})
+	}
 }
