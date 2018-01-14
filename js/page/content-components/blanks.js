@@ -145,6 +145,7 @@ export default class Blanks extends Component{
 	    		this._showResult(blakns_price_newspaper, blakns_price_offsetpaper, blakns_paint_gramm, blakns_price_min,
 	    		 elemInner, circulation, blakns_price_master, blanks_price_kalka, blanks_price_plastina, blanks_price_copy_plastin,
 	    		 blakns_paint_grammOver, blakns_price_minOver)
+	    		this._showTableRow()
 	    	});
 
 	}
@@ -256,10 +257,11 @@ export default class Blanks extends Component{
 		  this._getCalculatResult(dataNewspaper, dataOffsetPaper, dataPaintGr, dataPriceMin, 
 		  	circulationData, blakns_price_master, blanks_price_kalka, blanks_price_plastina, blanks_price_copy_plastin,
 	    		 blakns_paint_grammOver, blakns_price_minOver);
+
 		    elemInnerRes.innerHTML = `
 			<table>
 			  <caption>
-			    Результат
+			    Результат <span class="drop-down">▼</span>
 			  </caption>
 			  <tr>
 			    <th>Наименование операции</th>
@@ -286,6 +288,9 @@ export default class Blanks extends Component{
 			    <td><b>${Math.round(this.result)}</b></td>
 			  </tr>
 			</table>    ` //отрисовка результата
+			let table = document.querySelector('tbody')
+			table.firstElementChild.classList = "open";
+			table.lastElementChild.classList = "open";
 		}
 
 	_getPaperLargeCirculation(dataNewspaper, dataOffsetPaper, circulation) {
@@ -298,9 +303,7 @@ export default class Blanks extends Component{
 			}
 	}
 	_getPaintLargeCirculation(blakns_paint_grammOver, circulation, i) {
-
 		  	this._result_paint = ( circulation * i / 1000)*50 * blakns_paint_grammOver;
-
 	}
 	_printing_timeLargeCirculation(blakns_price_minOver, circulation, blanks_price_plastina, blanks_price_copy_plastin,
 		blanks_price_kalka, i){

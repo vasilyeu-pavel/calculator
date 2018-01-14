@@ -17,6 +17,9 @@ select, button, input {
   background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
   transition: all .218s ease 0s;
 }
+button {
+  cursor:pointer;
+}
 
 select:hover {
   color: rgb(24,24,24);
@@ -141,6 +144,14 @@ td {
 tr:nth-child(odd) {
   background: white;
 }
+
+tr {
+  display: none;
+}
+
+.open {
+ display: table-row;
+}
 tr:nth-child(even) {
   background: #E8E6D1;
 }
@@ -162,6 +173,9 @@ tr:nth-child(even) {
     padding-top: 1%;
 }
 
+.menu_bar img {
+  cursor:pointer;
+}
 .blanks_change_data {
   margin-bottom: 3px;
 }
@@ -201,6 +215,18 @@ width: 200px;
 .blanks_change_data_exit {
   margin-top: 5px;
 }
+
+.drop-down {
+    font-size: 18px;
+    float: right;
+    margin-right: 50px;
+    color: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
+    text-shadow: 1px 1px 1px #686461;
+    cursor:pointer;
+    width: 40px;
+    text-align: center
+}
+
 
 
 
