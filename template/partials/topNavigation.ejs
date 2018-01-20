@@ -1,0 +1,13 @@
+    <ul class="nav nav-tabs justify-content-end">
+
+      <% if (user) { %>
+      <li><a class="nav-link disabled";"><%=user.username %></a></li>
+      <form method=POST action=/logout>
+
+	    <li> <a href="" class="nav-link" style="border-bottom: 3px solid;" onclick="
+	    $('form').submit();return false"
+	    >выход</a></form></li>
+	    <% } else { %>
+	    <li><a href="/login" class="nav-link" style="border-bottom: 3px solid">вход</a></li>
+	    <% } %>
+    </ul>
