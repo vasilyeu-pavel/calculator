@@ -16,7 +16,7 @@ export default class Component {
             <div class="content_element"><span class="content_element_span">Тираж:<span> 
             </div><input type="text" class="all_input" value="1" style="margin-bottom: 10px">
             <div id="buttonResult">
-			<button id="button" style="margin-bottom: 10px">Посчитать</button>
+			<button id="button" class="btn btn-primary" style="margin-bottom: 10px; background: #007bff">Посчитать</button>
             </div>
             <div name="result" id="res"></div>         
       

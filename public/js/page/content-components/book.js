@@ -74,7 +74,7 @@ export default class Book extends Component {
 			      <div class"content_element_change_oftions" style="float: left; width: 200px">Доп. затраты (мастер):</div>
 			      <input class="blanks_change_data" id="input_books_change_master2" value="${books_change_master2}"><br>
 			      
-			       <button class="blanks_change_data_exit" id="exit">применить</button>
+			      		      <button type="button" class="btn btn-primary btn-sm" style="background: #007bff">применить</button>
 					 `
 			      document.body.appendChild(tooltipElem);
 
@@ -142,7 +142,7 @@ export default class Book extends Component {
 						books_change_master2 = +input_books_change_master2.value || 10500;
 					}
 				      
-				  let exit = document.querySelector('[class="blanks_change_data_exit"]')
+				  let exit = document.querySelector('[class="btn btn-primary btn-sm"]')
 					    if (exit) { 
 					    	 exit.onclick = function(e) {
 					    		if (showingTooltip) {

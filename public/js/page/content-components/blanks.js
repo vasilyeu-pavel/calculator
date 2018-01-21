@@ -70,7 +70,7 @@ export default class Blanks extends Component{
 			      <input class="blanks_change_data" id="input_blakns_paint_grammOver" value="${blakns_paint_grammOver}"><br>
 			      <div class"content_element_change_oftions" style="float: left; width: 200px">Рабочее время печати при больших тиражах (мин):</div>
 			      <input class="blanks_change_data" id="input_blakns_price_minOver" value="${blakns_price_minOver}"><br>
-			      		      <button class="blanks_change_data_exit" id="exit">применить</button>
+			      		      <button type="button" class="btn btn-primary btn-sm" style="background: #007bff">применить</button>
 				 `
 		      document.body.appendChild(tooltipElem);
 
@@ -129,7 +129,7 @@ export default class Blanks extends Component{
 					blakns_price_minOver = +input_blakns_price_minOver.value || 500;
 				}			      
 		   
-			  let exit = document.querySelector('[class="blanks_change_data_exit"]')
+			  let exit = document.querySelector('[class="btn btn-primary btn-sm"]')
 				    if (exit) { 
 				    	 exit.onclick = function(e) {
 				    		if (showingTooltip) {
@@ -260,6 +260,7 @@ export default class Blanks extends Component{
 
 		    elemInnerRes.innerHTML = `
 			<table>
+			
 			  <div class="tableHeader">
 			    Результат <span class="drop-down">▼</span>
 			  </div>

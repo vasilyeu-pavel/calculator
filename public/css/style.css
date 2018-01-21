@@ -132,10 +132,11 @@ table {
 .tableHeader { 
   padding: 10px;
   color: white;
-  background: #8FD4C1;
   font-size: 18px;
   text-align: left;
   font-weight: bold;
+  border-radius: 5px;
+  background: dodgerblue;
 }
 th {
   border-bottom: 3px solid #B9B29F;
@@ -215,6 +216,7 @@ tr:nth-child(even) {
 .content_element_change_oftions {
 float: left;
 width: 200px;
+
 }
 
 .blanks_change_data_exit {
@@ -225,10 +227,10 @@ width: 200px;
     font-size: 18px;
     float: right;
     margin-right: 50px;
+    margin-bottom: 5px;
     color: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
     text-shadow: 1px 1px 1px #686461;
     cursor:pointer;
-    width: 40px;
     text-align: center
 }
 
@@ -252,10 +254,9 @@ width: 200px;
   margin-top: 30px;
   background: #007bff;
   margin-bottom: 40px;
-
 }
 
-.login ..login-form input {
+.login .login-form input {
   margin-bottom: 2px;
 }
 
@@ -272,3 +273,4 @@ width: 200px;
 .nav-link {
   margin-right: 10px;
 }
+
