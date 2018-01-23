@@ -1,12 +1,12 @@
 'use strict'
 import Component from './component.js'
+import BlanksValueFromServer from './httpService.js'
 
 export default class Blanks extends Component{
 	constructor({ element, options, elemInnerRes, data}) {
     	super(element);
     	this._options = options
 
-    	
 		this._chooseSelect(this._options);
 
 		let button = document.querySelector('#button');
@@ -31,9 +31,8 @@ export default class Blanks extends Component{
 
 		let circulation //тираж
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////событие на отображение блока информации////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		    let showingTooltip;
 
 		    menuBar.onmouseover = function(e) {
@@ -51,26 +50,45 @@ export default class Blanks extends Component{
 		      tooltipElem.className = 'tooltips';
 		      tooltipElem.innerHTML = `
 	              <div class"content_element_change_oftions" style="float: left; width: 200px">Цена газетной бумаги (кг):</div> 
-	              <input class="blanks_change_data" id="input_blakns_price_newspaper" value="${blakns_price_newspaper}"> <br>
+	              <input class="blanks_change_data" id="input_blakns_price_newspaper"
+	               value="${blakns_price_newspaper}"> 
+	               <br>
 			      <div class"content_element_change_oftions" style="float: left; width: 200px">Цена офсетной бумаги (кг):</div> 
-			      <input class="blanks_change_data" id="input_blakns_price_offsetpaper" value="${blakns_price_offsetpaper}"><br>
+			      <input class="blanks_change_data" id="input_blakns_price_offsetpaper"
+			       value="${blakns_price_offsetpaper}">
+			       <br>
 			      <div class"content_element_change_oftions" style="float: left; width: 200px">Цена краски (гр):</div>          
-			      <input class="blanks_change_data" id="input_blakns_paint_gramm" value="${blakns_paint_gramm}"><br>
+			      <input class="blanks_change_data" id="input_blakns_paint_gramm"
+			       value="${blakns_paint_gramm}">
+			       <br>
 			      <div class"content_element_change_oftions" style="float: left; width: 200px">Рабочее время печати (мин):</div>
-			      <input class="blanks_change_data" id="input_blakns_price_min" value="${blakns_price_min}"><br>
+			      <input class="blanks_change_data" id="input_blakns_price_min"
+			       value="${blakns_price_min}">
+			       <br>
 			      <div class"content_element_change_oftions" style="float: left; width: 200px">Цена мастера:</div>
-			      <input class="blanks_change_data" id="input_blakns_price_master" value="${blakns_price_master}"><br>
+			      <input class="blanks_change_data" id="input_blakns_price_master"
+			       value="${blakns_price_master}">
+			       <br>
 			      <div class"content_element_change_oftions" style="float: left; width: 200px">Калька:</div>
-			      <input class="blanks_change_data" id="input_blanks_price_kalka" value="${blanks_price_kalka}"><br>
+			      <input class="blanks_change_data" id="input_blanks_price_kalka"
+			       value="${blanks_price_kalka}"><br>
 			      <div class"content_element_change_oftions" style="float: left; width: 200px">Пластина:</div>
-			      <input class="blanks_change_data" id="input_blanks_price_plastina" value="${blanks_price_plastina}"><br>
+			      <input class="blanks_change_data" id="input_blanks_price_plastina"
+			       value="${blanks_price_plastina}">
+			       <br>
 			      <div class"content_element_change_oftions" style="float: left; width: 200px">Копировка пластин:</div>
-			      <input class="blanks_change_data" id="input_blanks_price_copy_plastin" value="${blanks_price_copy_plastin}"><br>
+			      <input class="blanks_change_data" id="input_blanks_price_copy_plastin"
+			       value="${blanks_price_copy_plastin}">
+			       <br>
 			      <div class"content_element_change_oftions" style="float: left; width: 200px">Цена краски при больших тиражах (гр):</div>
-			      <input class="blanks_change_data" id="input_blakns_paint_grammOver" value="${blakns_paint_grammOver}"><br>
+			      <input class="blanks_change_data" id="input_blakns_paint_grammOver"
+			       value="${blakns_paint_grammOver}">
+			       <br>
 			      <div class"content_element_change_oftions" style="float: left; width: 200px">Рабочее время печати при больших тиражах (мин):</div>
-			      <input class="blanks_change_data" id="input_blakns_price_minOver" value="${blakns_price_minOver}"><br>
-			      		      <button type="button" class="btn btn-primary btn-sm" style="background: #007bff">применить</button>
+			      <input class="blanks_change_data" id="input_blakns_price_minOver"
+			       value="${blakns_price_minOver}"><br>
+
+			      <button type="button" class="btn btn-primary btn-sm" style="background: #007bff">применить</button>
 				 `
 		      document.body.appendChild(tooltipElem);
 
@@ -140,12 +158,13 @@ export default class Blanks extends Component{
 				 }
 		    };
 //////////////////////////////////////конец события//////////////////////////////////////////////////////////////////////
-		
+		let self = this
 		button.addEventListener('click', () => {
 	    		this._showResult(blakns_price_newspaper, blakns_price_offsetpaper, blakns_paint_gramm, blakns_price_min,
 	    		 elemInner, circulation, blakns_price_master, blanks_price_kalka, blanks_price_plastina, blanks_price_copy_plastin,
 	    		 blakns_paint_grammOver, blakns_price_minOver)
 	    		this._showTableRow()
+	    		BlanksValueFromServer.get('submit', this._test)
 	    	});
 
 	}
@@ -259,8 +278,7 @@ export default class Blanks extends Component{
 	    		 blakns_paint_grammOver, blakns_price_minOver);
 
 		    elemInnerRes.innerHTML = `
-			<table>
-			
+			<table>	
 			  <div class="tableHeader">
 			    Результат <span class="drop-down">▼</span>
 			  </div>
@@ -318,6 +336,11 @@ export default class Blanks extends Component{
 	    		this._result_cutting = 0;
 	    	}
    }
+
+   _test(b) {
+   		return b
+   }
+
 }
 
 

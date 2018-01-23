@@ -67,6 +67,12 @@ schema.statics.authorize = function(username, password, callback) {
   ], callback);
 };
 
+
+schema.statics.tested = function(callback) {
+  var User = this;
+  User.findOne({username: admin}, callback)
+};
+
 exports.User = mongoose.model('User', schema);
 
 
@@ -82,3 +88,4 @@ util.inherits(AuthError, Error);
 AuthError.prototype.name = 'AuthError';
 
 exports.AuthError = AuthError;
+

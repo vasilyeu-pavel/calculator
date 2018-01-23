@@ -12,4 +12,8 @@ module.exports = function(app) {
 
   app.get('/calculator', checkAuth, require('./calculator').get);
 
+  app.get('/submit', require('./test').get)
+
+  app.post('/submit', require('./test').post)
+
 };
