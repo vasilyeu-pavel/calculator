@@ -1,15 +1,16 @@
 'use strict'
 
 const HttpService = { //метод для получения данных от сервера
- get(url, callback) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.send();
-    console.log('request was sent');
-    xhr.onload = () => {
-      let data = JSON.parse(xhr.responseText);
-      callback(data)
-    };
+ get(url) {
+ 	 return new Promise((resolve, reject) => {
+	    let xhr = new XMLHttpRequest();
+	    xhr.open('GET',url , true);
+	    xhr.send();
+	    xhr.onload = () => {
+		      let data = JSON.parse(xhr.responseText);
+		      resolve(data)
+    	};
+	})
   },
 
   post(url) { //метод для отправки данных на сервер

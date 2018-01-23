@@ -1,6 +1,6 @@
 'use strict'
 import Component from './component.js'
-import BlanksValueFromServer from './httpService.js'
+import httpService from './httpService.js'
 
 export default class Blanks extends Component{
 	constructor({ element, options, elemInnerRes, data}) {
@@ -164,9 +164,11 @@ export default class Blanks extends Component{
 	    		 elemInner, circulation, blakns_price_master, blanks_price_kalka, blanks_price_plastina, blanks_price_copy_plastin,
 	    		 blakns_paint_grammOver, blakns_price_minOver)
 	    		this._showTableRow()
-	    		BlanksValueFromServer.get('submit', this._test)
+				  
 	    	});
-
+		httpService.get('submit').then(function (data) {
+			self._test(data);
+		})
 	}
 
 	_getPaper (dataNewspaper, dataOffsetPaper, circulation) {
@@ -338,7 +340,7 @@ export default class Blanks extends Component{
    }
 
    _test(b) {
-   		return b
+   		console.log(b);
    }
 
 }
