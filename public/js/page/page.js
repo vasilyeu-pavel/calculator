@@ -1,10 +1,10 @@
 'use strict'
 
 
-import Book from './content-components/book.js'
-import Blanks from './content-components/blanks.js'
+import Book from './content-components/books/book.js'
+import Blanks from './content-components/blanks/blanks.js'
 import Component from './content-components/component.js'
-import Title from './content-components/title.js'
+import Title from './content-components/title/title.js'
 
 
 const data = {

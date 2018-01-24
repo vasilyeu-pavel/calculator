@@ -1,5 +1,5 @@
 'use strict'
-import Component from './component.js'
+import Component from '../component.js'
 
 export default class Title extends Component {
 	constructor ({ element, options }) {
@@ -17,14 +17,13 @@ export default class Title extends Component {
     })
 
 	}
-    _chooseSelectTitle(options) {
+  _chooseSelectTitle(options) {
     // перебор свой в исходных данных, для отрисовки селектов
       let arr = options;
       for (let i = 0; i < arr.length; i++) {
         this._render(arr[i])
       }
-          // перебор свой в исходных данных, для отрисовки селектов
-    } 
+  } 
     
 
 

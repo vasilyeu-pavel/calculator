@@ -1,8 +1,7 @@
+var MongoClient = require('mongodb').MongoClient
+var url = 'mongodb://localhost:27017/blanks';
 
 exports.get = function(req, res) {
-var MongoClient = require('mongodb').MongoClient
-var url = 'mongodb://localhost:27017/myproject';
-
 	MongoClient.connect(url, function(err, client) {
 
 	var db = client.db('testing')
@@ -33,7 +32,7 @@ exports.post = function(req, res) {
 	var collection = db.collection('documents')
 	collection.remove({}, function (err) {
 		collection.insert({
-
+			
 		blakns_paint_gramm : blakns_paint_gramm, 
 		blakns_price_min : blakns_price_min, 
 		blakns_price_newspaper : blakns_price_newspaper,

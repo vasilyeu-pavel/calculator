@@ -1,5 +1,5 @@
 'use strict'
-import Component from './component.js'
+import Component from '../component.js'
 
 export default class Book extends Component {
 	constructor ({element, options, data}) {

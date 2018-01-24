@@ -12,8 +12,8 @@ module.exports = function(app) {
 
   app.get('/calculator', checkAuth, require('./calculator').get);
 
-  app.get('/submit', require('./test').get)
+  app.get('/dataBlanks', require('./data/blanks').get)
 
-  app.post('/submit', require('./test').post)
+  app.post('/dataBlanks', require('./data/blanks').post)
 
 };
