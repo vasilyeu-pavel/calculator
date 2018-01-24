@@ -47,43 +47,44 @@ export default class Blanks extends Component{
 		      let input_blakns_paint_gramm = document.querySelector('#input_blakns_paint_gramm');
 		      let input_blakns_price_min = document.querySelector('#input_blakns_price_min');
 		      let input_blakns_price_master = document.querySelector('#input_blakns_price_master');
-		      let test = data
+
+		      let blanksData = data
 
 				input_blakns_price_newspaper.oninput = () => {
-					test.blakns_price_newspaper = +input_blakns_price_newspaper.value || 12200;
+					blanksData.blakns_price_newspaper = +input_blakns_price_newspaper.value || 12200;
 				}
 				input_blakns_price_offsetpaper.oninput = () => {
-					test.blakns_price_offsetpaper = +input_blakns_price_offsetpaper.value || 22000;
+					blanksData.blakns_price_offsetpaper = +input_blakns_price_offsetpaper.value || 22000;
 				}
 
 				input_blakns_paint_gramm.oninput = () => {
-					test.blakns_paint_gramm = +input_blakns_paint_gramm.value || 590;
+					blanksData.blakns_paint_gramm = +input_blakns_paint_gramm.value || 590;
 				}
 
 				input_blakns_price_min.oninput = () => {
-					test.blakns_price_min = +input_blakns_price_min.value || 330;
-				}
-				
-				input_blakns_price_master.oninput = () => {
-					test.blakns_price_master = +input_blakns_price_master.value || 5400;
-				}
-				input_blanks_price_kalka.oninput = () => {
-					test.blanks_price_kalka = +input_blanks_price_kalka.value || 1900;
-				}
-				input_blanks_price_plastina.oninput = () => {
-					test.blanks_price_plastina = +input_blanks_price_plastina.value || 15000;
-				}
-				input_blanks_price_copy_plastin.oninput = () => {
-					test.blanks_price_copy_plastin = +input_blanks_price_copy_plastin.value || 7500;
-				}
-				input_blakns_paint_grammOver.oninput = () => {
-					test.blakns_paint_grammOver = +input_blakns_paint_grammOver.value || 110;
-				}	
-				input_blakns_price_minOver.oninput = () => {
-					test.blakns_price_minOver1 = +input_blakns_price_minOver.value || 500;
+					blanksData.blakns_price_min = +input_blakns_price_min.value || 330;
 				}
 
-				let dataForRequest = JSON.stringify(test);		  
+				input_blakns_price_master.oninput = () => {
+					blanksData.blakns_price_master = +input_blakns_price_master.value || 5400;
+				}
+				input_blanks_price_kalka.oninput = () => {
+					blanksData.blanks_price_kalka = +input_blanks_price_kalka.value || 1900;
+				}
+				input_blanks_price_plastina.oninput = () => {
+					blanksData.blanks_price_plastina = +input_blanks_price_plastina.value || 15000;
+				}
+				input_blanks_price_copy_plastin.oninput = () => {
+					blanksData.blanks_price_copy_plastin = +input_blanks_price_copy_plastin.value || 7500;
+				}
+				input_blakns_paint_grammOver.oninput = () => {
+					blanksData.blakns_paint_grammOver = +input_blakns_paint_grammOver.value || 110;
+				}	
+				input_blakns_price_minOver.oninput = () => {
+					blanksData.blakns_price_minOver1 = +input_blakns_price_minOver.value || 500;
+				}
+
+				let dataForRequest = JSON.stringify(blanksData);		  
 
 			  let exit = document.querySelector('[class="btn btn-primary btn-sm"]')
 				    if (exit) { 
