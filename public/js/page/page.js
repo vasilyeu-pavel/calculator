@@ -16,19 +16,6 @@ const data = {
 const dataValues = {
  "blanks" : 
 	{
-	"data_blank" :
-		{
-		"blakns_paint_gramm" : 590, 
-		"blakns_price_min" : 330, 
-		"blakns_price_newspaper" : 12200,
-		"blakns_price_offsetpaper" : 22000,
-		"blakns_price_master" : 5400,
-	    "blanks_price_kalka" : 1900,
-		"blanks_price_plastina" : 15000,
-		"blanks_price_copy_plastin" : 7500,
-		"blakns_paint_grammOver" : 110,
-		"blakns_price_minOver" : 500
-	},
 	"blanksOptions" : [
 		{"Тип бумаги:" : ["Газетная", "Офсетная"]},
 		{"Мастер:" : [1, 2]},
@@ -103,9 +90,7 @@ export default class Page extends Component{
 				this._blanks = new Blanks ({
 					element: this._element.querySelector('[class="bar_content"]'),
 					options: dataValues.blanks.blanksOptions,
-					elemInnerRes: this._element.querySelector('#res'),
-					data: dataValues.blanks.data_blank //передаём как свойство дата, результат выполнения функции
-				
+					elemInnerRes: this._element.querySelector('#res'),			
 			})
 			
 				break;
