@@ -11,7 +11,6 @@ import dataSelect from './content-components/data/data.js'
 export default class Page extends Component{
 	constructor({element}) {
 		super(element)
-			console.log(dataSelect);
 		this._title = new Title({
 			element: this._element.querySelector('[class="bar_tittle"]'),
 			options: dataSelect.title

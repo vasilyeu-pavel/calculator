@@ -138,6 +138,9 @@ table {
   border-radius: 5px;
   background: dodgerblue;
 }
+.tableHeader:hover {
+  cursor:pointer;
+}
 th {
   border-bottom: 3px solid #B9B29F;
   padding: 10px;

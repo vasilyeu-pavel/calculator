@@ -95,7 +95,7 @@ export default class Component {
 		` //отрисовка меню_бара
 	}
 	_showTableRow() {
-		let button = document.querySelector('.drop-down')
+		let button = document.querySelector('.tableHeader')
 		button.addEventListener('click', () => {
 		 let table = document.querySelector('tbody')
 		 let arr = table.children
