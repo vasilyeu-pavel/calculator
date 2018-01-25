@@ -146,6 +146,7 @@ th {
 td {
   padding: 10px;
 }
+
 tr:nth-child(odd) {
   background: white;
 }
@@ -159,6 +160,12 @@ tr {
 }
 tr:nth-child(even) {
   background: #E8E6D1;
+}
+
+tr:hover {
+  background-color: skyblue;
+  height: 52px;
+  transition-duration: 0.5s; 
 }
 
 .menu_bar img {
