@@ -1,6 +1,6 @@
 'use strict'
 import Component from '../component.js'
-import httpService from './httpService.js'
+import httpService from '../httpService/httpService.js'
 import calculator from './calculator.js'
 import Tooltip from './renderTooltip.js'
 
@@ -21,8 +21,7 @@ export default class Blanks extends Component{
 
 		let self = this
 
-///////////////////////////событие на отображение блока информации////////////////////////////////////////////////////
-		let showingTooltip;
+		let showingTooltip; //событие на отображение блока информации
 
 		httpService.get('dataBlanks').then(function (data) {
 	    self._menuBar.onmouseover = function(e) {
@@ -43,7 +42,35 @@ export default class Blanks extends Component{
 
 	      showingTooltip = tooltipElem;
 
-	      let input_blakns_price_newspaper = document.querySelector('#input_blakns_price_newspaper');
+	      let blanksData = data
+
+		  let dataForRequest = self._changeDataValue(blanksData)
+
+		  let exit = document.querySelector('[class="btn btn-primary btn-sm"]')
+			    if (exit) { 
+			    	 exit.onclick = function(e) {
+			    	 	httpService.post('dataBlanks', dataForRequest).then(function (text) {
+			    	 	 console.log(text);
+			    	 	})
+			    		if (showingTooltip) {
+				        document.body.removeChild(showingTooltip);
+				        showingTooltip = null;
+			      		}
+			   		 };
+			 	}
+	    	}; 
+		})
+		this._button.addEventListener('click', () => {
+			httpService.get('dataBlanks').then(function (data) {
+		 	 calculator.get(data, circulation);
+		 	 self._showTableRow();
+			})
+	    });
+	}
+	//для методов
+	_changeDataValue (blanksData) {
+
+		  let input_blakns_price_newspaper = document.querySelector('#input_blakns_price_newspaper');
 	      let input_blakns_price_offsetpaper = document.querySelector('#input_blakns_price_offsetpaper');
 	      let input_blakns_paint_gramm = document.querySelector('#input_blakns_paint_gramm');
 	      let input_blakns_price_min = document.querySelector('#input_blakns_price_min');
@@ -53,8 +80,6 @@ export default class Blanks extends Component{
 	      let input_blanks_price_copy_plastin = document.querySelector('#input_blanks_price_copy_plastin')
 	      let input_blakns_paint_grammOver = document.querySelector('#input_blakns_paint_grammOver')
 	      let input_blakns_price_minOver = document.querySelector('#input_blakns_price_minOver')
-
-	      let blanksData = data
 
 			input_blakns_price_newspaper.oninput = () => {
 				blanksData.blakns_price_newspaper = +input_blakns_price_newspaper.value || 12200;
@@ -90,31 +115,11 @@ export default class Blanks extends Component{
 				blanksData.blakns_price_minOver = +input_blakns_price_minOver.value || 500;
 			}
 
-			let dataForRequest = JSON.stringify(blanksData);		  
+			console.log(blanksData);
+			let dataForRequest = JSON.stringify(blanksData);
 
-		  let exit = document.querySelector('[class="btn btn-primary btn-sm"]')
-			    if (exit) { 
-			    	 exit.onclick = function(e) {
-			    	 	httpService.post('dataBlanks', dataForRequest).then(function (text) {
-			    	 	 console.log(text);
-			    	 	})
-			    		if (showingTooltip) {
-			        document.body.removeChild(showingTooltip);
-			        showingTooltip = null;
-			      }
-			    };
-			 }
-	    }; 
-	})
-//////////////////////////////////////конец события//////////////////////////////////////////////////////////////////////
-		this._button.addEventListener('click', () => {
-			httpService.get('dataBlanks').then(function (data) {
-		 	 calculator.get(data, circulation);
-		 	 self._showTableRow();
-			})
-	    });
+			return dataForRequest
 	}
-	//для методов
 }
 
 

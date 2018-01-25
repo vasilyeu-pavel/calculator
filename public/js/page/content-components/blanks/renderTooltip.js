@@ -1,5 +1,5 @@
 let Tooltip = {
- 	renderTooltip (element, data, target) {
+  renderTooltip (element, data, target) {
 	  element.innerHTML = `
       <div class"content_element_change_oftions" style="float: left; width: 200px">
       Цена газетной бумаги (кг):</div> 
@@ -64,7 +64,7 @@ let Tooltip = {
       <button type="button" class="btn btn-primary btn-sm" style="background: #007bff">применить</button>
 	 `
  	 document.body.appendChild(element);
- 	  let coords = target.getBoundingClientRect();
+ 	let coords = target.getBoundingClientRect();
 
  	  let left = coords.left + (target.offsetWidth - element.offsetWidth) / 2;
       if (left < 0) left = 0; // не вылезать за левую границу окна

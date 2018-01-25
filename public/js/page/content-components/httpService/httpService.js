@@ -8,6 +8,7 @@ const HttpService = { //метод для получения данных от �
 	    xhr.send();
 	    xhr.onload = () => {
 		      let data = JSON.parse(xhr.responseText);
+		      console.log(data);
 		      resolve(data)
     	};
 	})
@@ -17,11 +18,11 @@ const HttpService = { //метод для получения данных от �
  	 return new Promise((resolve, reject) => {
 	    let xhr = new XMLHttpRequest();
 	    xhr.open("POST", url, true)
+	    console.log(json);
 	    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8')
 	    xhr.onload = () => {
 		     resolve(xhr.responseStatus)
     	};
-    	
     	xhr.send(json);
 	})
   },

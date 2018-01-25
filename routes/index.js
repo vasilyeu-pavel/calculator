@@ -16,4 +16,8 @@ module.exports = function(app) {
 
   app.post('/dataBlanks', require('./data/blanks').post)
 
+  app.get('/dataBooks', require('./data/books').get)
+
+  app.post('/dataBooks', require('./data/books').post)
+
 };
